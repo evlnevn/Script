@@ -1,0 +1,46 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+
+<dom-module id="absensi-asisten">
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        box-sizing: border-box;
+      }
+
+    paper-button{
+      margin-top: 30px;
+    }
+    </style>
+
+    <paper-button raised>asdsad</paper-button>
+
+    <paper-tabs selected="{{selected}}">
+      <paper-tab>Daftar Asisten</paper-tab>
+      <paper-tab>Absensi</paper-tab>
+      <paper-tab>Jadwal Jaga</paper-tab>
+      <paper-tab>Rekap Kehadiran</paper-tab>
+    </paper-tabs>
+
+  <iron-pages selected="{{selected}}">
+    <div>Page 1</div>
+    <div>Page 2</div>
+    <div>Page 3</div>
+    <div>Page 4</div>
+  </iron-pages>
+  
+    
+  </template>
+  <script>
+    Polymer({
+      is: 'absensi-asisten',
+
+      });
+
+
+  </script>
+  </dom-module>

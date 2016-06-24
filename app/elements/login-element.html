@@ -1,0 +1,170 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+
+<dom-module id="login-element">
+  <template>
+
+    <style>
+      background-color: black;
+      :host {
+        display: block;
+        box-sizing: border-box;
+
+      }
+
+    paper-material{
+      width: 500px;
+      height: 400px;
+      margin-top: 30px;
+      padding: 30px;
+
+    }
+    .center{
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+    }
+
+    paper-button{
+      margin-top: 30px;
+    }
+
+    </style>
+
+    <iron-ajax
+        id="ajax"
+        url="{{url}}"
+        handle-as="json"
+        body="{{body}}"
+        method="POST"
+        on-response="handleResponse"
+        on-error="handleError"
+        content-type="application/json"
+        debounce-duration="300"></iron-ajax>
+
+
+    <div class="center">
+      <paper-material elevation="3">
+      <h2>Form login</h2>
+      <form id="form" is="iron-form" method="post" action="/">
+        <paper-input label="username" name="name" value={{username}}></paper-input>
+        <paper-input label="password" name="password" value={{password}} type="password"></paper-input>
+        <a><paper-button raised on-tap="submitLogin">login</paper-button></a>
+      </form>
+<!--  <paper-tabs selected="{{selected}}">
+      <paper-tab>Daftar Asisten</paper-tab>
+      <paper-tab>Input Jadwal Kuliah</paper-tab>
+      <paper-tab>Absensi</paper-tab>
+      <paper-tab>Jadwal Jaga</paper-tab>
+
+    </paper-tabs>
+
+  <iron-pages selected="{{selected}}">
+    <div>Daftar Asisten</div>
+     <paper-tab>Input Jadwal Kuliah</paper-tab>
+    <div>Absensi</div>
+    <div>Jadwal Jaga</div>
+  </iron-pages> -->
+
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'login-element',
+
+      properties: {
+        url : String,
+        username : String,
+        password : String,
+        body : Object,
+      },
+
+      // Element Lifecycle
+      submitLogin: function(e){
+        this.$.form.submit();
+      },
+
+      handleResponse : function(e){
+        console.log(e);
+      },
+
+      handleError : function(e){
+          console.log(e);
+      },
+
+      ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+      },
+
+      attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+      },
+
+      detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+      },
+
+      // Element Behavior
+
+      /**
+       * Sometimes it's just nice to say hi.
+       *
+       * @param {string} greeting A positive greeting.
+       * @return {string} The full greeting.
+       */
+      sayHello: function(greeting) {
+        var response = greeting || 'Hello World!';
+        return 'login-element says, ' + response;
+      },
+
+      /**
+       * The `login-element-lasers` event is fired whenever `fireLasers` is called.
+       *
+       * @event login-element-lasers
+       * @detail {{sound: String}}
+       */
+
+      /**
+       * Attempt to destroy this element's enemies with a beam of light!
+       *
+       * Or, at least, dispatch an event in the vain hope that someone else will
+       * do the zapping.
+       */
+      fireLasers: function() {
+        this.fire('login-element-lasers', {sound: 'Pew pew!'});
+      }
+    });
+  </script>
+</dom-module>
